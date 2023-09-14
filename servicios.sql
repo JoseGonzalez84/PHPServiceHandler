@@ -24,13 +24,14 @@ DROP TABLE IF EXISTS `servicios`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `servicios` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `id_servicio` int DEFAULT NULL,
-  `timestamp` varchar(12) DEFAULT NULL,
-  `status` tinyint DEFAULT NULL,
-  `pid` int DEFAULT NULL,
+  `id_servicio` varchar(255) NOT NULL,
+  `timestamp` varchar(12) NOT NULL,
+  `status` tinyint NOT NULL DEFAULT '0',
+  `pid` int NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `id_servicio_pid_UNIQUE` (`id_servicio`,`pid`) /*!80000 INVISIBLE */
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  UNIQUE KEY `id_servicio_pid_UNIQUE` (`id_servicio`,`pid`) /*!80000 INVISIBLE */,
+  UNIQUE KEY `id_servicio_UNIQUE` (`id_servicio`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
