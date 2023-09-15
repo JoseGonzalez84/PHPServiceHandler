@@ -113,7 +113,8 @@ class Servicio {
         $output = [];
         $returnCode = '';
         if (empty($ownData) === false && $ownData['status'] !== self::STATUS_RUNNING) {
-            exec('php ControlShell.php '.$this->_idServicio.' > /dev/null 2>&1 &', $output, $returnCode);
+            echo 'php ControlShell.php '.$ownData['id_servicio'].' > /dev/null 2>&1 &';
+            exec('php ControlShell.php '.$ownData['id_servicio'].' > /dev/null 2>&1 &', $output, $returnCode);
         } else {
             $output[] = 'Ya arrancado';
             $returnCode = 0;
@@ -126,6 +127,7 @@ class Servicio {
     {
         $ownData = $this->getLastInfo();
         $bbdd = $this->conexion();
+        echo 'UPDATE servicios SET status = "'.self::STATUS_KILLING.'", timestamp = "'.time().'" WHERE id_servicio = "'.$this->_idServicio.'" AND pid = '.$ownData['pid'].';'; 
         $bbdd->query(
             'UPDATE servicios SET status = "'.self::STATUS_KILLING.'", timestamp = "'.time().'" WHERE id_servicio = "'.$this->_idServicio.'" AND pid = '.$ownData['pid'].';'
         );
@@ -139,7 +141,7 @@ class Servicio {
 
         $bbdd = $this->conexion();
         $result = $bbdd->query('SELECT * FROM servicios WHERE id_servicio = "'.$idServicio.'" LIMIT 1');
-        $output = ($result !== false) ? $result->fetch_array() : [];
+        $output = ($result !== false) ? $result->fetch_array(MYSQLI_ASSOC) : [];
         $bbdd->close();
 
         return $output;

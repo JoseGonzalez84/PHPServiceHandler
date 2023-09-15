@@ -38,7 +38,6 @@ if (isset($_POST['addService']) === true) {
 }
 
 $resultServices = $bbdd->query('SELECT id_servicio FROM servicios;');
-var_dump($_POST);
 $bbdd->close();
 $servicesHTML = [];
 while ($idServicioArray = $resultServices->fetch_array(MYSQLI_NUM)) {
@@ -53,7 +52,6 @@ while ($idServicioArray = $resultServices->fetch_array(MYSQLI_NUM)) {
     if (isset($_POST['idServicio']) === true && $_POST['idServicio'] === $idServicio) {
         if (isset($_POST['actStart']) === true) {
             $salida = $servicioInicio->start();
-            unset($servicioInicio);
             $servicio = new Servicio($idServicio);
             $lastInfo = $servicio->getLastInfo($idServicio);
             $statusMessage = 'Iniciando';
@@ -85,6 +83,7 @@ while ($idServicioArray = $resultServices->fetch_array(MYSQLI_NUM)) {
     $serviceHTML .= '</div>';
 
     $servicesHTML[$idServicio] = $serviceHTML;
+    unset($servicioInicio);
 }
 ?>
 
