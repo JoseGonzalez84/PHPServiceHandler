@@ -1,4 +1,4 @@
-# PHPServiceHandler 0.1
+# PHPServiceHandler 0.2
 
 ## Info
 
@@ -7,7 +7,10 @@ El proyecto se trata de un controlador de servicios. Con él, se pueden arrancar
 Por ejemplo, si tienes corriendo en infinito un script con un while, puedes meter su lógica dentro de `Servicio.class.php` (o llamarlo) para que haga esa operativa.
 Luego, desde `ControlWeb.php` puedes monitorizar su estado. Puedes arrancarlo, pararlo, ver su última actualización
 
-La clase Servicio.class.php es el encargado de  grabar el estado
+## Versiones
+### 0.2
+
+Puede gestionar varios servicios a la vez y se ha mejorado el control sobre los mismos.
 
 ## Requisitos
 
@@ -26,7 +29,7 @@ El identificador de servicio es muy básico. Debiera ser algo mas complejo.
 
 ControlShell está muy básico. Debiera aceptar parámetros, sobre todo si es para lanzarlo vía shell.
 
-El ControlWeb debiera poder controlar mas servicios y tener una interfaz algo mas depurada.
+El ControlWeb debiera tener una interfaz algo mas depurada.
 
 ## Licencia
 
