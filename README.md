@@ -1,4 +1,4 @@
-# PHPServiceHandler 0.2
+# PHPServiceHandler 0.2.2
 
 ## Info
 
@@ -8,6 +8,16 @@ Por ejemplo, si tienes corriendo en infinito un script con un while, puedes mete
 Luego, desde `ControlWeb.php` puedes monitorizar su estado. Puedes arrancarlo, pararlo, ver su última actualización
 
 ## Versiones
+### 0.2.2
+
+Se ha controlado si el sistema es Windows, para utilizar un control de PID que no sea con POSIX. Aunque por lo visto,
+todavía falla.
+
+Se ha hecho mejora de código para que cumpla los estándares.
+
+La clase obtiene mas responsabilidad pero con la idea de tener menos dependencia del exterior.
+Ahora genera su propio UUID en caso de ser necesario, y la conexión a la BBDD la comparte para no duplicar claves.
+
 ### 0.2
 
 Puede gestionar varios servicios a la vez y se ha mejorado el control sobre los mismos.
@@ -17,7 +27,6 @@ Puede gestionar varios servicios a la vez y se ha mejorado el control sobre los 
 - PHP 8
 - MySQL
 - Apache u otro servidor web.
-- Que corra en un LINUX, UNIX o sistema que use POSIX.
 
 ## TO-DOs
 
@@ -33,4 +42,4 @@ El ControlWeb debiera tener una interfaz algo mas depurada.
 
 ## Licencia
 
-Este software no tiene garantía de ningún tipo. Se entrega tal cual. No se pueden reclamar derechos sobre el uso del mismo.
+Este software no tiene garantía de ningún tipo. Se entrega tal cual. No se pueden reclamar derechos sobre el uso del mismo. Ni se permite usarlo para hacer el mal.

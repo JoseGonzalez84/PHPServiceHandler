@@ -1,39 +1,33 @@
 <?php
 /**
- * Web de control de servicios
- * 
- * PHP Service Handler v0.2
+ * Web de control de servicios.
+ * php version 8.2
+ * PHP Service Handler v0.3
+ *
+ * @category Servicios
+ * @package  Sin_Definir
+ * @author   José González Silva <josegs84@gmail.com>
+ * @license  Sin garantía. Libre uso siempre que no sea hacer el mal.
+ * @version  GIT: <git_id>
+ * @link     None
  */
 require_once 'Servicio.class.php';
 // Modo estricto.
 ini_set('display_errors', '1');
 ini_set('display_startup_errors', '1');
 error_reporting(E_ALL);
-
 // Variables iniciales.
 const MENSAJES = [
     Servicio::STATUS_RUNNING => 'Activo',
     Servicio::STATUS_KILLING => 'Deteniendo',
     Servicio::STATUS_STOPPED => 'Parado',
 ];
-// Funciones auxiliares.
-function generateRandomUUID(mysqli $bbdd) {
-    $resultServices = $bbdd->query('SELECT id_servicio FROM servicios;');
-    $services = $resultServices->fetch_array(MYSQLI_NUM);
-    $newUUID = bin2hex(openssl_random_pseudo_bytes(16));
-    if (in_array($newUUID, $services) === true) {
-        $newUUID = generateRandomUUID($bbdd);
-    }
-
-    return $newUUID;
-}
 
 // Inicio del programa.
-$bbdd = new mysqli('localhost', 'josegonzalez', '12345678', 'experimentos', '3307');
+$bbdd = Servicio::conexion();
 
 if (isset($_POST['addService']) === true) {
-    $randomUUID = generateRandomUUID($bbdd);
-    $newService = new Servicio($randomUUID);
+    $newService = new Servicio();
     $newService->run();
 }
 
@@ -103,7 +97,7 @@ while ($idServicioArray = $resultServices->fetch_array(MYSQLI_NUM)) {
             border-radius: 18px;
             padding: 1em;
             width: 35em;
-            margin: 1em;    
+            margin: 1em;
         }
 
         .box form {
@@ -128,10 +122,10 @@ while ($idServicioArray = $resultServices->fetch_array(MYSQLI_NUM)) {
         <input type="button" value="Refrescar" onclick="javascript:document.location.href = '<?php $_SERVER['REQUEST_URI']; ?>'" />
     </form>
     <div class="container">
-        <?php 
-        foreach($servicesHTML as $keyService => $valService) {
+        <?php
+        foreach ($servicesHTML as $keyService => $valService) {
             echo $valService;
-        }  
+        }
         ?>
     </div>
 </body>
